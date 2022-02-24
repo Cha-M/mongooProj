@@ -46,10 +46,10 @@ const specified = (property) => {
 }
 
 //C.reate
-exports.addMovie = async (title, actor) => {
+exports.addMovie = async (title, actor, info) => {
     try {
         if (specified(title)) {
-            await Movie.create({ title, actor });
+            await Movie.create({ title, actor, info });
             return (`${title} added to database`);
         }
         else {
@@ -61,7 +61,7 @@ exports.addMovie = async (title, actor) => {
             console.log(error);
         }
         else {
-            return (`${title} not added\n${title} already in database`)
+            return (`${title} not added. ${title} already in database`)
         }
     }
 }
@@ -87,11 +87,11 @@ exports.readMovie = async (title) => {
     }
 }
 //U.pdate
-exports.updateMovie = async (title, actor) => {
+exports.updateMovie = async (title, actor, info) => {
     try {
         if (specified(title)) {
             if (await Movie.findOne({ title })) {
-                await Movie.updateOne({ title }, { actor } );
+                await Movie.updateOne({ title }, { actor, info });
                 return (`${title} updated in database`);
             }
             else {

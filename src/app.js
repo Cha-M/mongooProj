@@ -7,7 +7,7 @@ const app = async (yargsObj) => {
     try {
         //C.reate
         if (yargsObj.addMovie) {
-            console.log(await addMovie(yargsObj.title, yargsObj.actor));
+            console.log(await addMovie(yargsObj.title, yargsObj.actor, yargsObj.info));
             //add functionality
         }
         //R.ead
@@ -16,7 +16,7 @@ const app = async (yargsObj) => {
         }
         //U.pdate
         else if (yargsObj.updateMovie) {
-            console.log(await updateMovie(yargsObj.title, yargsObj.actor));
+            console.log(await updateMovie(yargsObj.title, yargsObj.actor, yargsObj.info));
         }
         //D.elete
         else if (yargsObj.deleteMovie) {
