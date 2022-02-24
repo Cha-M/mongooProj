@@ -62,24 +62,20 @@ exports.addMovie = async (title, actor) => {
 exports.readMovie = async (title) => {
     try {
         if (specified(title)) {
-            console.log("Is specified");
-            await Movie.findOne(
-                { title : { $eq : title } },
-                (err) =>    {
-                                if (err) {
-                                    return (`${title} not found in database`);
-                                }
-                                else {
-                                    return (`${title} not found in database`);
-                                }
-                            }
-                );
+            if (await Movie.findOne({ title })) {
+                return (`${title} found in database`);
+            }
+            else {
+                return (`${title} not found in database`); 
+            }
+            
         }
+        
         else {
             return (`Title not specified`);
         }
     } catch (error) {
-        console.log(error);
+        console.log("readMovie error", error);
     }
 }
 //U.pdate
