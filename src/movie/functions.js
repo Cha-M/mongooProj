@@ -48,13 +48,21 @@ const specified = (property) => {
 //C.reate
 exports.addMovie = async (title, actor) => {
     try {
-        // const movieObj = {title: title, actor: actor};
-        // await Movie.create({title: title, actor: actor});
-        await Movie.create({ title, actor });
-        return (`${title} added to database`);
+        if (specified(title)) {
+            await Movie.create({ title, actor });
+            return (`${title} added to database`);
+        }
+        else {
+            return (`Title not specified`);
+        }
 
     } catch(error) {
-        console.log(error);
+        if (error.code != 11000) {
+            console.log(error);
+        }
+        else {
+            return (`${title} not added\n${title} already in database`)
+        }
     }
 }
 
@@ -70,7 +78,7 @@ exports.readMovie = async (title) => {
             }
             
         }
-        
+
         else {
             return (`Title not specified`);
         }
@@ -82,8 +90,12 @@ exports.readMovie = async (title) => {
 exports.updateMovie = async (title, actor) => {
     try {
         if (specified(title)) {
-            await Movie.updateOne({ title }, { actor } );
-            return (`${title} updated in database`);
+            if (await Movie.updateOne({ title }, { actor } )) {
+                return (`${title} updated in database`);
+            }
+            else {
+                return (`${title} not in database`);
+            }
         }
         else {
             return (`Title not specified`);
