@@ -11,3 +11,11 @@ exports.addMovie = async (title, actor) => {
         console.log(error);
     }
 }
+
+exports.list = async () => {
+    try {
+        return await Movie.find({});
+    } catch (error) {
+        console.log(error);
+    }
+}
