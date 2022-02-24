@@ -1,41 +1,5 @@
 const Movie = require("./model");
 
-// class Movie {
-//     constructor (title, actor = "Not specified", info = "Not specified") {
-//         this.title = title;
-//         this.actor = actor;
-//         this.info = info;
-//     }
-//     //C.reate
-//     async add (collection) {
-//         await collection.insertOne(this);
-//         //there are only two lines, not much of a need for try catch
-//         return "Success";
-//         //add this to the database
-//     }
-
-//     //R.ead
-//     async read (collection) {
-//         return await collection.findOne({title : {$eq: this.title}});
-//     }
-
-
-//     //U.pdate
-//     async update (collection) {
-//         await collection.updateOne({title : {$eq: this.title}});
-//     }
-
-//     //D.elete
-//     async delete (collection) {
-//         await collection.deleteOne({title : {$eq: this.title}});
-//     }
-
-//     async list (collection) {
-//         return await collection.find().toArray();
-//         //list all movies in the db
-//     }
-// }
-
 const specified = (property) => {
     if (property == undefined || property == "Not specified") {
         return false;
