@@ -14,7 +14,7 @@ const app = async (yargsObj) => {
             console.log(await list());
         }
         else {
-            console.log("Incorrect command");
+            console.log("Command not recognised");
         }
         await mongoose.disconnect();
     } catch(error) {
