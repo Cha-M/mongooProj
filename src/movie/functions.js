@@ -37,7 +37,7 @@ const Movie = require("./model");
 // }
 
 const specified = (property) => {
-    if (property == "Not specified" || property == undefined) {
+    if (property == undefined || property == "Not specified") {
         return false;
     }
     else {
@@ -90,11 +90,12 @@ exports.readMovie = async (title) => {
 exports.updateMovie = async (title, actor) => {
     try {
         if (specified(title)) {
-            if (await Movie.updateOne({ title }, { actor } )) {
+            if (await Movie.findOne({ title })) {
+                await Movie.updateOne({ title }, { actor } );
                 return (`${title} updated in database`);
             }
             else {
-                return (`${title} not in database`);
+                return (`${title} not found in database. Use addMovie to add a movie.`);
             }
         }
         else {
@@ -109,13 +110,20 @@ exports.updateMovie = async (title, actor) => {
 exports.deleteMovie = async (title) => {
     try {
         if (specified(title)) {
-            await Movie.deleteOne({ title });
-            return (`${title} removed from database`);
+                const deleted = (await Movie.deleteOne({ title })).deletedCount;
+                if (deleted) {
+                    return (`${title} deleted from database.`);
+                }
+                else {
+                    return (`${title} not deleted from database.`);
+                }
+
         }
         else {
             return (`Title not specified`);
         }
-    } catch(error) {
+
+    } catch (error) {
         
         console.log(error);
     }
