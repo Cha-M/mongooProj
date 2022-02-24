@@ -37,7 +37,7 @@ const Movie = require("./model");
 // }
 
 const specified = (property) => {
-    if (specified == "Not specifed") {
+    if (property == "Not specified" || property == undefined) {
         return false;
     }
     else {
@@ -62,8 +62,18 @@ exports.addMovie = async (title, actor) => {
 exports.readMovie = async (title) => {
     try {
         if (specified(title)) {
-            await Movie.find({ title });
-            return (`${title} found in database`);
+            console.log("Is specified");
+            await Movie.findOne(
+                { title : { $eq : title } },
+                (err) =>    {
+                                if (err) {
+                                    return (`${title} not found in database`);
+                                }
+                                else {
+                                    return (`${title} not found in database`);
+                                }
+                            }
+                );
         }
         else {
             return (`Title not specified`);

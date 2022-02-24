@@ -6,7 +6,7 @@ const { addMovie, readMovie, updateMovie, deleteMovie, list } = require("./movie
 const app = async (yargsObj) => {
     try {
         //C.reate
-        if (yargsObj.add) {
+        if (yargsObj.addMovie) {
             console.log(await addMovie(yargsObj.title, yargsObj.actor));
             //add functionality
         }
