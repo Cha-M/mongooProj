@@ -62,10 +62,11 @@ exports.addMovie = async (title, actor) => {
 exports.readMovie = async (title) => {
     try {
         if (specified(title)) {
-            await Movie.find({ title }, (title) => { return (`${title} found in database`) });
+            await Movie.find({ title });
+            return (`${title} found in database`);
         }
         else {
-            return (`${title} not found in database`);
+            return (`Title not specified`);
         }
     } catch (error) {
         console.log(error);
