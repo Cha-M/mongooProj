@@ -1,0 +1,25 @@
+{
+  "name": "mongoose",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000m\u0000o\u0000n\u0000g\u0000o\u0000o\u0000P\u0000r\u0000o\u0000j\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cha-M/mongooProj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cha-M/mongooProj/issues"
+  },
+  "homepage": "https://github.com/Cha-M/mongooProj#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "mongoose": "^6.2.3",
+    "yargs": "^17.3.1"
+  }
+}
