@@ -17,4 +17,28 @@ const movieSchema  = new mongoose.Schema({
 });
 
 const Movie = mongoose.model("Movie", movieSchema);
-module.exports = Movie;
+
+
+const showSchema  = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    actor: {
+        type: String,
+        default: "Not specified"
+    },
+    info: {
+        type: String,
+        default: "Not specified"
+    }
+});
+
+const Show = mongoose.model("Show", showSchema);
+
+//Exports with object destructuring
+module.exports = {
+    Movie,
+    Show
+};

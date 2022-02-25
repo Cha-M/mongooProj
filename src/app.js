@@ -1,10 +1,12 @@
 require("./db/connection");
-const mongoose = require("mongoose");
 const yargs = require("yargs");
-const { addMovie, readMovie, updateMovie, deleteMovie, list } = require("./movie/functions");
+const mongoose = require("mongoose");
+
+const { addMovie, readMovie, updateMovie, deleteMovie, list, addShow } = require("./movie/functions");
 
 const app = async (yargsObj) => {
     try {
+        console.log(yargsObj.mediaType);
         //C.reate
         if (yargsObj.addMovie) {
             console.log(await addMovie(yargsObj.title, yargsObj.actor, yargsObj.info));
@@ -24,8 +26,17 @@ const app = async (yargsObj) => {
         }
         //List
         else if (yargsObj.list) {
-            console.log(await list());
+            console.log("yargs.mediaType", yargsObj.mediaType);
+            console.log(await list(yargsObj.mediaType));
         }
+
+        //New
+        //C.reate
+        else if (yargsObj.add) {
+            console.log(await add(yargsObj.title, yargsObj.actor, yargsObj.info, yargsObj.mediaType));
+            //add functionality
+        }
+
         else {
             console.log("Command not recognised");
         }
