@@ -10,26 +10,17 @@ const specified = (property) => {
     }
 }
 
-// //C.reate
-// exports.addMovie = async (title, actor, info) => {
-//     try {
-//         if (specified(title)) {
-//             await Movie.create({ title, actor, info });
-//             return (`${title} added to database`);
-//         }
-//         else {
-//             return (`Title not specified`);
-//         }
 
-//     } catch(error) {
-//         if (error.code != 11000) {
-//             console.log(error);
-//         }
-//         else {
-//             return (`${title} not added. ${title} already in database`)
-//         }
-//     }
-// }
+//List
+exports.list = async (media) => {
+    // console.log(media);
+    try {
+        return media == "Show" ? await Show.find({}) : await Movie.find({});
+
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 //C.reate
 exports.addItem = async (title, actor, info, media) => {
@@ -65,27 +56,6 @@ exports.addItem = async (title, actor, info, media) => {
         }
     }
 }
-
-// //R.ead
-// exports.readMovie = async (title) => {
-//     try {
-//         if (specified(title)) {
-//             if (await Movie.findOne({ title })) {
-//                 return (`${title} found in database`);
-//             }
-//             else {
-//                 return (`${title} not found in database`); 
-//             }
-            
-//         }
-
-//         else {
-//             return (`Title not specified`);
-//         }
-//     } catch (error) {
-//         console.log("readMovie error", error);
-//     }
-// }
 
 //R.ead
 exports.readItem = async (title, media) => {
@@ -124,27 +94,6 @@ exports.readItem = async (title, media) => {
         console.log("readMovie error", error);
     }
 }
-
-//U.pdate
-// exports.updateMovie = async (title, actor, info) => {
-//     try {
-//         if (specified(title)) {
-//             if (await Movie.findOne({ title })) {
-//                 await Movie.updateOne({ title }, { actor, info });
-//                 return (`${title} updated in database`);
-//             }
-//             else {
-//                 return (`${title} not found in database. Use addMovie to add a movie.`);
-//             }
-//         }
-//         else {
-//             return (`Title not specified`);
-//         }
-//     } catch(error) {
-        
-//         console.log(error);
-//     }
-// }
 
 //U.pdate
 exports.updateItem = async (title, actor, info, media) => {
@@ -186,28 +135,6 @@ exports.updateItem = async (title, actor, info, media) => {
 }
 
 //D.elete
-// exports.deleteMovie = async (title) => {
-//     try {
-//         if (specified(title)) {
-//                 const deleted = (await Movie.deleteOne({ title })).deletedCount;
-//                 if (deleted) {
-//                     return (`${title} deleted from database.`);
-//                 }
-//                 else {
-//                     return (`${title} not deleted from database.`);
-//                 }
-
-//         }
-//         else {
-//             return (`Title not specified`);
-//         }
-
-//     } catch (error) {   
-//         console.log(error);
-//     }
-// }
-
-//D.elete
 exports.deleteItem = async (title, media) => {
     try {
         switch(media) {
@@ -243,17 +170,6 @@ exports.deleteItem = async (title, media) => {
 
     } catch (error) {
         
-        console.log(error);
-    }
-}
-
-//List
-exports.list = async (media) => {
-    // console.log(media);
-    try {
-        return media == "Show" ? await Show.find({}) : await Movie.find({});
-
-    } catch (error) {
         console.log(error);
     }
 }
