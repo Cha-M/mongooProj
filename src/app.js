@@ -2,7 +2,7 @@ require("./db/connection");
 const yargs = require("yargs");
 const mongoose = require("mongoose");
 
-const { list, addItem, readItem, updateItem, deleteItem } = require("./movie/functions");
+const { list, addItem, readItem, updateItem, deleteItem, filteredList } = require("./movie/functions");
 
 const app = async (yargsObj) => {
     try {
@@ -28,6 +28,11 @@ const app = async (yargsObj) => {
         //D.elete
         else if (yargsObj.delete) {
             console.log(await deleteItem(yargsObj.title, yargsObj.media));
+        }
+
+        else if (yargsObj.filter) {
+            console.log("Media: ", yargsObj.media, ", Actor: ", yargsObj.actor, ", Info: ", yargsObj.info, ", Filter: ", yargsObj.filter);
+            console.log(await filteredList(yargsObj.actor, yargsObj.info, yargsObj.media, yargsObj.filter));
         }
 
         else {

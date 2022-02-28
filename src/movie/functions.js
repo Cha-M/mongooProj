@@ -22,6 +22,29 @@ exports.list = async (media) => {
     }
 }
 
+//Filtered List
+//console.log(await filteredList(yargsObj.title, yargsObj.actor, yargsObj.info, yargsObj.media, yargsObj.filter));
+// exports.filteredList = async (media, filter, filterValue) => {
+ exports.filteredList = async (actor, info, media, filter) => {
+// console.log(media);
+    try {
+        switch(filter)
+        {
+            case "Actor":
+                // console.log("(Actor)");
+                return media == "Show" ? await Show.find({actor: actor}) : await Movie.find({actor: actor});
+            case "Info":
+                // console.log("(Info)");
+                return media == "Show" ? await Show.find({info: info}) : await Movie.find({info: info});
+            default:
+                return `Specify --filter "Info" or --filter "Actor" with respective --info or --actor to filter search`;
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 //C.reate
 exports.addItem = async (title, actor, info, media) => {
     try {
